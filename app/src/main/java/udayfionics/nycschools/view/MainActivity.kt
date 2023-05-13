@@ -1,7 +1,8 @@
-package udayfionics.nycschools
+package udayfionics.nycschools.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import udayfionics.nycschools.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
