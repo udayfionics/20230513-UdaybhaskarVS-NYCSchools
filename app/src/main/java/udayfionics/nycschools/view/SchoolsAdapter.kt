@@ -1,11 +1,15 @@
 package udayfionics.nycschools.view
 
 import android.view.LayoutInflater
+import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import udayfionics.nycschools.databinding.ItemSchoolBinding
 import udayfionics.nycschools.model.School
+import udayfionics.nycschools.view.fragments.SchoolsFragmentDirections
 
 class SchoolsAdapter(private val schools: ArrayList<School>) :
     Adapter<SchoolsAdapter.SchoolsViewHolder>() {
@@ -31,9 +35,16 @@ class SchoolsAdapter(private val schools: ArrayList<School>) :
     }
 
     inner class SchoolsViewHolder(private var binding: ItemSchoolBinding) :
-        ViewHolder(binding.root) {
+        ViewHolder(binding.root), OnClickListener {
         fun bind(school: School) {
             binding.school = school
+            binding.listener = this
+        }
+
+        override fun onClick(v: View) {
+            val action =
+                SchoolsFragmentDirections.actionToSchoolDetailsFragment(binding.schoolNameTextView.tag.toString())
+            Navigation.findNavController(v).navigate(action)
         }
     }
 }
