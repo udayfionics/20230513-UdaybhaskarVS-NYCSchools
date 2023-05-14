@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/schoolsFragment"
         android:name="udayfionics.nycschools.view.fragments.SchoolsFragment"
-        android:label="fragment_schools"
+        android:label="NYC Schools"
         tools:layout="@layout/fragment_schools">
         <action
             android:id="@+id/actionToSchoolDetailsFragment"
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/schoolDetailsFragment"
         android:name="udayfionics.nycschools.view.fragments.SchoolDetailsFragment"
-        android:label="fragment_school_details"
+        android:label="School Details"
         tools:layout="@layout/fragment_school_details">
         <argument
             android:name="schoolDbn"
