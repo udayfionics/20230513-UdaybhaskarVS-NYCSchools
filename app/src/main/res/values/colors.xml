@@ -10,4 +10,5 @@
     <color name="blue200">#81D4FA</color>
     <color name="blue500">#03A9F4</color>
     <color name="blue700">#0288D1</color>
+    <color name="item_divider">#EAEAEA</color>
 </resources>

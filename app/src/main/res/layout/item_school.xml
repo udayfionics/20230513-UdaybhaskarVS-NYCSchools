@@ -3,11 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="school"
+            type="udayfionics.nycschools.model.School" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:background="#08000000">
+        android:paddingTop="5dp"
+        android:background="?attr/selectableItemBackground">
 
         <TextView
             android:id="@+id/schoolNameTextView"
@@ -17,6 +24,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:text="@{school.schoolName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -41,6 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="2dp"
+            android:text='@{school.totalStudents + " students"}'
             app:layout_constraintBottom_toBottomOf="@+id/studentsIV"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toEndOf="@+id/studentsIV"
@@ -66,6 +75,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="2dp"
+            android:text='@{(school.languageClasses == null) ? " - " : school.languageClasses}'
             app:layout_constraintBottom_toBottomOf="@+id/languageIV"
             app:layout_constraintStart_toEndOf="@+id/languageIV"
             tools:text="Spanish" />
@@ -89,6 +99,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="2dp"
+            android:text='@{((school.startTime == null) ? "" : school.startTime) + " - " + ((school.endTime == null) ? "" : school.endTime)}'
             app:layout_constraintBottom_toBottomOf="@+id/timingsIV"
             app:layout_constraintStart_toEndOf="@+id/timingsIV"
             tools:text="8:20am - 3:55pm" />
@@ -112,6 +123,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="2dp"
+            android:text="@{school.primaryAddressLine1}"
             app:layout_constraintBottom_toBottomOf="@+id/addressIV"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toEndOf="@+id/addressIV"
@@ -124,6 +136,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp"
+            android:text='@{school.city + ", " + school.stateCode + " - " + school.zip}'
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline3"
             app:layout_constraintStart_toStartOf="@+id/addressLineTextView"
@@ -136,6 +149,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.5" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/item_divider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
