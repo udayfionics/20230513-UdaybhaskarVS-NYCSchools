@@ -13,4 +13,21 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="Title">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/blue700</item>
+        <item name="android:fontFamily">@font/ebgaramond_extrabold</item>
+    </style>
+
+    <style name="Text">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/ebgaramond_medium</item>
+    </style>
+
+    <style name="Text.Error">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#D32F2F</item>
+        <item name="android:fontFamily">@font/ebgaramond_semibold</item>
+    </style>
 </resources>
