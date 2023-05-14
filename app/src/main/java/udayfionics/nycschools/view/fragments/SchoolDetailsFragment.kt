@@ -11,6 +11,7 @@ import udayfionics.nycschools.viewmodel.SchoolDetailsViewModel
 
 class SchoolDetailsFragment : Fragment() {
 
+    private lateinit var schoolDbn: String
     private lateinit var binding: FragmentSchoolDetailsBinding
     private lateinit var viewModel: SchoolDetailsViewModel
 
@@ -24,6 +25,10 @@ class SchoolDetailsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        arguments?.let {
+            schoolDbn = SchoolDetailsFragmentArgs.fromBundle(it).schoolDbn
+        }
         viewModel = ViewModelProvider(this)[SchoolDetailsViewModel::class.java]
     }
 }
