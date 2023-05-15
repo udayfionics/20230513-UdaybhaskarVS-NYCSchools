@@ -30,7 +30,10 @@ class SchoolsViewModel : ViewModel() {
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<List<School>>() {
                     override fun onSuccess(schoolsList: List<School>) {
-                        schools.value = schoolsList
+                        schools.value = schoolsList.sortedBy {
+                            it.schoolName
+                        }
+                        // schools.value = schoolsList
                         loading.value = false
                         error.value = null
                     }
