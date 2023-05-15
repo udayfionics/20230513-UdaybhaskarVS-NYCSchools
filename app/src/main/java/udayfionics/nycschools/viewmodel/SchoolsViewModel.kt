@@ -26,10 +26,10 @@ class SchoolsViewModel : ViewModel() {
     }
 
     fun refresh() {
-        fetchSchools()
+        fetchFromRemote()
     }
 
-    private fun fetchSchools() {
+    private fun fetchFromRemote() {
         loading.value = true
         disposable.add(
             schoolsService.getSchools()
