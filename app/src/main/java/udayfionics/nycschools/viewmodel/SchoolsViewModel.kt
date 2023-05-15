@@ -6,17 +6,24 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
+import udayfionics.nycschools.di.DaggerApiComponent
 import udayfionics.nycschools.model.School
 import udayfionics.nycschools.model.remote.SchoolsService
+import javax.inject.Inject
 
 class SchoolsViewModel : ViewModel() {
 
-    private val schoolsService: SchoolsService = SchoolsService()
+    @Inject
+    lateinit var schoolsService: SchoolsService
     private val disposable: CompositeDisposable = CompositeDisposable()
 
     var schools = MutableLiveData<List<School>>()
     var loading = MutableLiveData<Boolean>()
     var error = MutableLiveData<String?>()
+
+    init {
+        DaggerApiComponent.create().inject(this)
+    }
 
     fun refresh() {
         fetchSchools()
