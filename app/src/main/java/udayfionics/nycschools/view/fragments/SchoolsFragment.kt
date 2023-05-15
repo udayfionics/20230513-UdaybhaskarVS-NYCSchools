@@ -33,7 +33,7 @@ class SchoolsFragment : Fragment() {
         }
 
         viewModel = ViewModelProvider(this)[SchoolsViewModel::class.java]
-        viewModel.refresh()
+        viewModel.loadData()
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             binding.swipeRefreshLayout.isRefreshing = false
