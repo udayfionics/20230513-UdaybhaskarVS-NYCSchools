@@ -8,6 +8,10 @@
         <variable
             name="school"
             type="udayfionics.nycschools.model.School" />
+
+        <variable
+            name="satScore"
+            type="udayfionics.nycschools.model.SatScore" />
     </data>
 
     <androidx.core.widget.NestedScrollView

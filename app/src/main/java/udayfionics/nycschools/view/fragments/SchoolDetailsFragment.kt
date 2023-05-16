@@ -40,5 +40,8 @@ class SchoolDetailsFragment : Fragment() {
         viewModel.school.observe(viewLifecycleOwner) {
             binding.school = it
         }
+        viewModel.satScore.observe(viewLifecycleOwner) {
+            binding.satScore = it
+        }
     }
 }
