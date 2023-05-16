@@ -7,6 +7,7 @@ import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 import kotlinx.coroutines.launch
 import udayfionics.nycschools.di.DaggerApiComponent
+import udayfionics.nycschools.model.SatScore
 import udayfionics.nycschools.model.School
 import udayfionics.nycschools.model.remote.SchoolsService
 import udayfionics.nycschools.model.room.SchoolDatabase
@@ -72,6 +73,23 @@ class SchoolsViewModel : BaseViewModel() {
                     }
                 })
         )
+        disposable.add(
+            schoolsService.getSatScores()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<List<SatScore>>() {
+                    override fun onSuccess(satScoreList: List<SatScore>) {
+                        storeSatScoresLocally(satScoreList)
+                        toast.value = "SatScores retrieved from remote"
+                    }
+
+                    override fun onError(e: Throwable) {
+                        e.printStackTrace()
+                        loading.value = false
+                        error.value = e.message
+                    }
+                })
+        )
     }
 
     private fun updateSchoolsListUI(schoolsList: List<School>) {
@@ -90,6 +108,18 @@ class SchoolsViewModel : BaseViewModel() {
                 dao.deleteAllSchools()
                 val result = dao.insertAll(*schoolList.toTypedArray())
                 toast.value = "${result.size} stored"
+            }
+        }
+    }
+
+    private fun storeSatScoresLocally(satScoreList: List<SatScore>) {
+        schoolDatabase?.let {
+            launch {
+                val satScoreDao = it.satScoreDao()
+                satScoreDao.deleteAllSatScores()
+//                satScoreDao.insertAll(*satScoreList.toTypedArray())
+                val satScoreResult = satScoreDao.insertAll(*satScoreList.toTypedArray())
+                toast.value = "${satScoreResult.size} stored"
             }
         }
     }
