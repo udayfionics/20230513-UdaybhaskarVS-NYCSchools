@@ -400,6 +400,131 @@
                     tools:text="50%" />
             </LinearLayout>
 
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginBottom="8dp"
+                android:background="#22dddddd"
+                app:layout_constraintBottom_toTopOf="@+id/aboutTitleTextView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/attGradRatesLayout" />
+
+            <TextView
+                android:id="@+id/satResultsTitleTextView"
+                style="@style/Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="#11dddddd"
+                android:padding="15dp"
+                android:text='@{"SAT Results (" + (satScore.numOfSatTestTakers == null ? "Not available" : satScore.numOfSatTestTakers + " students") + ")"}'
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/attGradRatesLayout"
+                tools:text="SAT Results" />
+
+            <View
+                android:id="@+id/satScoreCenterDivider"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/item_divider"
+                app:layout_constraintBottom_toTopOf="@+id/aboutTitleTextView"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@+id/satResultsTitleTextView" />
+
+
+            <TextView
+                android:id="@+id/criticalReadingTitleTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical"
+                android:minLines="2"
+                android:text='@{"Critical Reading: "}'
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@+id/satResultsTitleTextView"
+                tools:text="Critical Reading" />
+
+            <TextView
+                android:id="@+id/criticalReadingValueTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical"
+                android:minLines="2"
+                android:text='@{satScore.satCriticalReadingAvgScore}'
+                app:layout_constraintBottom_toBottomOf="@+id/criticalReadingTitleTextView"
+                app:layout_constraintStart_toEndOf="@+id/criticalReadingTitleTextView"
+                app:layout_constraintTop_toTopOf="@+id/criticalReadingTitleTextView"
+                tools:text="351" />
+
+            <TextView
+                android:id="@+id/mathTitleTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:minLines="2"
+                android:text='@{"Math: "}'
+                app:layout_constraintEnd_toEndOf="@+id/criticalReadingTitleTextView"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@+id/criticalReadingTitleTextView"
+                tools:text="Math" />
+
+            <TextView
+                android:id="@+id/mathValueTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical"
+                android:minLines="2"
+                android:text='@{satScore.satMathAvgScore}'
+                app:layout_constraintBottom_toBottomOf="@+id/mathTitleTextView"
+                app:layout_constraintStart_toEndOf="@+id/mathTitleTextView"
+                app:layout_constraintTop_toTopOf="@+id/mathTitleTextView"
+                tools:text="351" />
+
+            <TextView
+                android:id="@+id/writingTitleTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:minLines="2"
+                android:text='@{"Writing: "}'
+                app:layout_constraintEnd_toEndOf="@+id/mathTitleTextView"
+                app:layout_constraintStart_toStartOf="@+id/guideline3"
+                app:layout_constraintTop_toBottomOf="@+id/mathTitleTextView"
+                tools:text="Writing" />
+
+            <TextView
+                android:id="@+id/writingValueTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical"
+                android:minLines="2"
+                android:text='@{satScore.satWritingAvgScore}'
+                app:layout_constraintBottom_toBottomOf="@+id/writingTitleTextView"
+                app:layout_constraintStart_toEndOf="@+id/writingTitleTextView"
+                app:layout_constraintTop_toTopOf="@+id/writingTitleTextView"
+                tools:text="351" />
+
             <TextView
                 android:id="@+id/aboutTitleTextView"
                 style="@style/Title"
@@ -411,7 +536,7 @@
                 android:tag="@{school.dbn}"
                 android:text='@{"About"}'
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/attGradRatesLayout"
+                app:layout_constraintTop_toBottomOf="@+id/writingTitleTextView"
                 tools:text="About" />
 
             <TextView
