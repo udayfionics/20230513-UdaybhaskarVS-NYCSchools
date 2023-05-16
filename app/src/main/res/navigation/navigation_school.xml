@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/schoolDetailsFragment"
         android:name="udayfionics.nycschools.view.fragments.SchoolDetailsFragment"
-        android:label="School Details"
+        android:label="Additional Information"
         tools:layout="@layout/fragment_school_details">
         <argument
             android:name="schoolDbn"
