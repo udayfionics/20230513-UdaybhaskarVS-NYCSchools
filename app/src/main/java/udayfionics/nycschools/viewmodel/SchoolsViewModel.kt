@@ -1,7 +1,5 @@
 package udayfionics.nycschools.viewmodel
 
-import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -14,7 +12,7 @@ import udayfionics.nycschools.model.remote.SchoolsService
 import udayfionics.nycschools.model.room.SchoolDatabase
 import javax.inject.Inject
 
-class SchoolsViewModel(application: Application) : BaseViewModel(application) {
+class SchoolsViewModel : BaseViewModel() {
 
     @Inject
     lateinit var schoolsService: SchoolsService
@@ -34,19 +32,22 @@ class SchoolsViewModel(application: Application) : BaseViewModel(application) {
         fetchFromRemote()
     }
 
-    fun loadData() {
+    fun loadData(schoolDatabase: SchoolDatabase) {
+        this.schoolDatabase = schoolDatabase
         fetchFromDatabase()
     }
 
     private fun fetchFromDatabase() {
         loading.value = true
         launch {
-            val schoolsList = SchoolDatabase(getApplication()).schoolDao().getAllSchools()
-            if (schoolsList.isNotEmpty()) {
-                updateSchoolsListUI(schoolsList)
-                toast.value = "Schools retrieved from database"
-            } else {
-                fetchFromRemote()
+            schoolDatabase?.let {
+                val schoolsList = it.schoolDao().getAllSchools()
+                if (schoolsList.isNotEmpty()) {
+                    updateSchoolsListUI(schoolsList)
+                    toast.value = "Schools retrieved from database"
+                } else {
+                    fetchFromRemote()
+                }
             }
         }
     }
@@ -84,16 +85,12 @@ class SchoolsViewModel(application: Application) : BaseViewModel(application) {
 
     private fun storeSchoolsLocally(schoolList: List<School>) {
         launch {
-            val dao = SchoolDatabase(getApplication()).schoolDao()
-            dao.deleteAllSchools()
-            val result = dao.insertAll(*schoolList.toTypedArray())
-            toast.value = "${result.size} stored"
-            /*var i = 0
-            while (i < schoolList.size) {
-                schoolList[i].dbn = result[i].toString()
-                ++i
-            }*/
-            // updateSchoolsListUI(schoolList)
+            schoolDatabase?.let {
+                val dao = it.schoolDao()
+                dao.deleteAllSchools()
+                val result = dao.insertAll(*schoolList.toTypedArray())
+                toast.value = "${result.size} stored"
+            }
         }
     }
 

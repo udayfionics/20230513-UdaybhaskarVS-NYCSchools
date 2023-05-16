@@ -1,13 +1,12 @@
 package udayfionics.nycschools.viewmodel
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseViewModel(application: Application) : AndroidViewModel(application),
+abstract class BaseViewModel : ViewModel(),
     CoroutineScope {
     private val job = Job()
 

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import udayfionics.nycschools.databinding.FragmentSchoolsBinding
+import udayfionics.nycschools.model.room.SchoolDatabase
 import udayfionics.nycschools.view.SchoolsAdapter
 import udayfionics.nycschools.viewmodel.SchoolsViewModel
 
@@ -34,7 +35,7 @@ class SchoolsFragment : Fragment() {
         }
 
         viewModel = ViewModelProvider(this)[SchoolsViewModel::class.java]
-        viewModel.loadData()
+        viewModel.loadData(SchoolDatabase(requireContext()))
 
         binding.swipeRefreshLayout.setOnRefreshListener {
             binding.swipeRefreshLayout.isRefreshing = false
