@@ -14,10 +14,20 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="Title.Big" parent="Title">
+        <item name="android:textSize">36sp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:paddingBottom">15dp</item>
+    </style>
+
     <style name="Title">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/blue700</item>
         <item name="android:fontFamily">@font/ebgaramond_extrabold</item>
+    </style>
+
+    <style name="Text.Big" parent="Text">
+        <item name="android:textSize">18sp</item>
     </style>
 
     <style name="Text">

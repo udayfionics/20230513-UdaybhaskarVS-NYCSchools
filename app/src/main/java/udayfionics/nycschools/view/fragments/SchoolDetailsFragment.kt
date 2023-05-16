@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import udayfionics.nycschools.databinding.FragmentSchoolDetailsBinding
+import udayfionics.nycschools.model.room.SchoolDatabase
 import udayfionics.nycschools.viewmodel.SchoolDetailsViewModel
 
 class SchoolDetailsFragment : Fragment() {
@@ -30,5 +31,14 @@ class SchoolDetailsFragment : Fragment() {
             schoolDbn = SchoolDetailsFragmentArgs.fromBundle(it).schoolDbn
         }
         viewModel = ViewModelProvider(this)[SchoolDetailsViewModel::class.java]
+        viewModel.loadData(schoolDbn, SchoolDatabase(requireContext()))
+
+        observeViewModel()
+    }
+
+    private fun observeViewModel() {
+        viewModel.school.observe(viewLifecycleOwner) {
+            binding.school = it
+        }
     }
 }

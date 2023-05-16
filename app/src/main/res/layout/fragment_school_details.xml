@@ -1,13 +1,438 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.fragments.SchoolDetailsFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+        <variable
+            name="school"
+            type="udayfionics.nycschools.model.School" />
+    </data>
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:fillViewport="true">
 
-</FrameLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/selectableItemBackground"
+            android:paddingTop="5dp">
+
+            <TextView
+                android:id="@+id/schoolNameTextView"
+                style="@style/Title.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:tag="@{school.dbn}"
+                android:text="@{school.schoolName}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="NYC School Name" />
+
+            <ImageView
+                android:id="@+id/studentsIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="@+id/studentsTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/studentsTextView"
+                app:srcCompat="@drawable/ic_students"
+                app:tint="@color/blue700" />
+
+            <TextView
+                android:id="@+id/studentsTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="2dp"
+                android:gravity="center_vertical"
+                android:minLines="2"
+                android:text='@{school.totalStudents + " students"}'
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/studentsIV"
+                app:layout_constraintTop_toBottomOf="@+id/schoolNameTextView"
+                tools:text="256 students" />
+
+            <ImageView
+                android:id="@+id/languageIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="@+id/languageTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/languageTextView"
+                app:srcCompat="@drawable/ic_language"
+                app:tint="@color/blue700" />
+
+            <TextView
+                android:id="@+id/languageTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="2dp"
+                android:ellipsize="end"
+                android:gravity="center_vertical"
+                android:maxLines="2"
+                android:minLines="2"
+                android:text='@{(school.languageClasses == null) ? " - " : school.languageClasses}'
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/languageIV"
+                app:layout_constraintTop_toBottomOf="@+id/studentsTextView"
+                tools:text="Spanish" />
+
+            <ImageView
+                android:id="@+id/timingsIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="@+id/timingsTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/timingsTextView"
+                app:srcCompat="@drawable/ic_timings"
+                app:tint="@color/blue700" />
+
+            <TextView
+                android:id="@+id/timingsTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical"
+                android:minLines="2"
+                android:text='@{((school.startTime == null) ? "" : school.startTime) + " - " + ((school.endTime == null) ? "" : school.endTime)}'
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/timingsIV"
+                app:layout_constraintTop_toBottomOf="@+id/languageTextView"
+                tools:text="8:20am - 3:55pm" />
+
+            <ImageView
+                android:id="@+id/addressIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="@+id/addressLineTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/addressLineTextView"
+                app:srcCompat="@drawable/ic_address"
+                app:tint="@color/blue700" />
+
+            <TextView
+                android:id="@+id/addressLineTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:gravity="center_vertical"
+                android:minLines="2"
+                android:text='@{school.primaryAddressLine1 + ", " + school.city + ", " + school.stateCode + " - " + school.zip}'
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/addressIV"
+                app:layout_constraintTop_toBottomOf="@+id/timingsTextView"
+                tools:text="50 Avenue X, Brooklyn, NY - 11223" />
+
+            <ImageView
+                android:id="@+id/phoneIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="@+id/phoneTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/phoneTextView"
+                app:srcCompat="@drawable/ic_phone"
+                app:tint="@color/blue700" />
+
+            <TextView
+                android:id="@+id/phoneTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autoLink="phone"
+                android:gravity="center_vertical"
+                android:minLines="2"
+                android:text='@{school.phoneNumber}'
+                android:textColorLink="@color/blue500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/phoneIV"
+                app:layout_constraintTop_toBottomOf="@+id/addressLineTextView"
+                tools:text="212-524-4360" />
+
+            <ImageView
+                android:id="@+id/faxIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="@+id/faxTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/faxTextView"
+                app:srcCompat="@drawable/ic_fax"
+                app:tint="@color/blue700" />
+
+            <TextView
+                android:id="@+id/faxTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autoLink="phone"
+                android:gravity="center_vertical"
+                android:minLines="2"
+                android:text='@{school.faxNumber}'
+                android:textColorLink="@color/blue500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/faxIV"
+                app:layout_constraintTop_toBottomOf="@+id/phoneTextView"
+                tools:text="212-524-4365" />
+
+            <ImageView
+                android:id="@+id/websiteIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="@+id/websiteTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/websiteTextView"
+                app:srcCompat="@drawable/ic_website"
+                app:tint="@color/blue700" />
+
+            <TextView
+                android:id="@+id/websiteTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autoLink="web"
+                android:gravity="center_vertical"
+                android:linksClickable="true"
+                android:minLines="2"
+                android:text='@{school.website}'
+                android:textColorLink="@color/blue500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/websiteIV"
+                app:layout_constraintTop_toBottomOf="@+id/faxTextView"
+                tools:text="www.theclintonschool.net" />
+
+            <ImageView
+                android:id="@+id/emailIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="@+id/emailTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/emailTextView"
+                app:srcCompat="@drawable/ic_email"
+                app:tint="@color/blue700" />
+
+            <TextView
+                android:id="@+id/emailTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:autoLink="email"
+                android:gravity="center_vertical"
+                android:linksClickable="true"
+                android:minLines="2"
+                android:text='@{school.schoolEmail}'
+                android:textColorLink="@color/blue500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/emailIV"
+                app:layout_constraintTop_toBottomOf="@+id/websiteTextView"
+                tools:text="admissions@theclintonschool.net" />
+
+            <ImageView
+                android:id="@+id/locationIV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintBottom_toBottomOf="@+id/locationTextView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/locationTextView"
+                app:srcCompat="@drawable/ic_location"
+                app:tint="@color/blue700" />
+
+            <TextView
+                android:id="@+id/locationTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="50dp"
+                android:autoLink="web"
+                android:gravity="center_vertical"
+                android:linksClickable="true"
+                android:minLines="2"
+                android:text='@{"https://maps.google.com/?q=" + school.latitude + "," + school.longitude}'
+                android:textColorLink="@color/blue500"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/locationIV"
+                app:layout_constraintTop_toBottomOf="@+id/emailTextView"
+                tools:text="https://maps.google.com/?q=37.786971,-122.399677" />
+
+            <LinearLayout
+                android:id="@+id/attGradRatesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:minHeight="50dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/locationTextView">
+
+                <TextView
+                    android:id="@+id/attendanceTextView"
+                    style="@style/Text.Big"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/blue700"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="4dp"
+                    android:paddingBottom="5dp"
+                    android:text='@{"Attendance Rate"}'
+                    android:textColor="@color/white"
+                    tools:text="Attendance Rate" />
+
+                <TextView
+                    style="@style/Text.Big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/blue700"
+                    android:gravity="center"
+                    android:text='@{"-"}'
+                    android:textColor="@color/white"
+                    tools:text="-" />
+
+                <TextView
+                    android:id="@+id/attendancePercentTextView"
+                    style="@style/Text.Big"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:background="@color/blue700"
+                    android:gravity="center"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="16dp"
+                    android:text='@{school.attendanceRate == null ? "" : ((int) (Double.parseDouble(school.attendanceRate) * 100)) + "%"}'
+                    android:textColor="@color/white"
+                    tools:text="50%" />
+
+                <TextView
+                    android:id="@+id/graduationTextView"
+                    style="@style/Text.Big"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/teal_700"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="4dp"
+                    android:text='@{"Graduation Rate"}'
+                    android:textColor="@color/white"
+                    tools:text="Graduation Rate" />
+
+                <TextView
+                    style="@style/Text.Big"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@color/teal_700"
+                    android:gravity="center"
+                    android:text='@{"-"}'
+                    android:textColor="@color/white"
+                    tools:text="-" />
+
+                <TextView
+                    android:id="@+id/graduationPercentTextView"
+                    style="@style/Text.Big"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.6"
+                    android:background="@color/teal_700"
+                    android:gravity="center"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="16dp"
+                    android:text='@{school.graduationRate == null ? "" : ((int) (Double.parseDouble(school.graduationRate) * 100)) + "%"}'
+                    android:textColor="@color/white"
+                    tools:text="50%" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/aboutTitleTextView"
+                style="@style/Title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:tag="@{school.dbn}"
+                android:text='@{"About"}'
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/attGradRatesLayout"
+                tools:text="About" />
+
+            <TextView
+                android:id="@+id/aboutTextView"
+                style="@style/Text.Big"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:paddingBottom="50dp"
+                android:text='@{school.overviewParagraph}'
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/aboutTitleTextView"
+                tools:text="Students who are prepared for college must have an education that encourages them to take risks as they produce and perform. Our college preparatory curriculum develops writers and has built a tight-knit community. Our school develops students who can think analytically and write creatively. Our arts programming builds on our 25 years of experience in visual, performing arts and music on a middle school level. We partner with New Audience and the Whitney Museum as cultural partners. We are a International Baccalaureate (IB) candidate school that offers opportunities to take college courses at neighboring universities." />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</layout>
