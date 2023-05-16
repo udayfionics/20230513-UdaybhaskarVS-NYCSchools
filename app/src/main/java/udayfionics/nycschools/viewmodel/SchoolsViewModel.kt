@@ -39,8 +39,8 @@ class SchoolsViewModel : BaseViewModel() {
 
     private fun fetchFromDatabase() {
         loading.value = true
-        launch {
-            schoolDatabase?.let {
+        schoolDatabase?.let {
+            launch {
                 val schoolsList = it.schoolDao().getAllSchools()
                 if (schoolsList.isNotEmpty()) {
                     updateSchoolsListUI(schoolsList)
@@ -84,8 +84,8 @@ class SchoolsViewModel : BaseViewModel() {
     }
 
     private fun storeSchoolsLocally(schoolList: List<School>) {
-        launch {
-            schoolDatabase?.let {
+        schoolDatabase?.let {
+            launch {
                 val dao = it.schoolDao()
                 dao.deleteAllSchools()
                 val result = dao.insertAll(*schoolList.toTypedArray())
