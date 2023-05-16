@@ -18,11 +18,13 @@ class SchoolsViewModel(application: Application) : BaseViewModel(application) {
 
     @Inject
     lateinit var schoolsService: SchoolsService
+    private var schoolDatabase: SchoolDatabase? = null
     private val disposable: CompositeDisposable = CompositeDisposable()
 
     var schools = MutableLiveData<List<School>>()
     var loading = MutableLiveData<Boolean>()
     var error = MutableLiveData<String?>()
+    var toast = MutableLiveData<String?>()
 
     init {
         DaggerApiComponent.create().inject(this)
@@ -42,12 +44,7 @@ class SchoolsViewModel(application: Application) : BaseViewModel(application) {
             val schoolsList = SchoolDatabase(getApplication()).schoolDao().getAllSchools()
             if (schoolsList.isNotEmpty()) {
                 updateSchoolsListUI(schoolsList)
-                Toast.makeText(
-                    getApplication(),
-                    "Schools retrieved from database",
-                    Toast.LENGTH_SHORT
-                )
-                    .show()
+                toast.value = "Schools retrieved from database"
             } else {
                 fetchFromRemote()
             }
@@ -64,12 +61,7 @@ class SchoolsViewModel(application: Application) : BaseViewModel(application) {
                     override fun onSuccess(schoolsList: List<School>) {
                         updateSchoolsListUI(schoolsList)
                         storeSchoolsLocally(schoolsList)
-                        Toast.makeText(
-                            getApplication(),
-                            "Schools retrieved from remote",
-                            Toast.LENGTH_SHORT
-                        )
-                            .show()
+                        toast.value = "Schools retrieved from remote"
                     }
 
                     override fun onError(e: Throwable) {
@@ -95,7 +87,7 @@ class SchoolsViewModel(application: Application) : BaseViewModel(application) {
             val dao = SchoolDatabase(getApplication()).schoolDao()
             dao.deleteAllSchools()
             val result = dao.insertAll(*schoolList.toTypedArray())
-            Toast.makeText(getApplication(), "${result.size} stored", Toast.LENGTH_SHORT).show()
+            toast.value = "${result.size} stored"
             /*var i = 0
             while (i < schoolList.size) {
                 schoolList[i].dbn = result[i].toString()
