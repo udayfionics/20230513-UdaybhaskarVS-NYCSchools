@@ -9,6 +9,7 @@ import udayfionics.nycschools.model.School
 @Database(entities = [School::class], version = 1)
 abstract class SchoolDatabase: RoomDatabase() {
     abstract fun schoolDao(): SchoolDao
+    abstract fun satScoreDao(): SatScoreDao
 
     companion object {
         @Volatile private var instance: SchoolDatabase? = null
