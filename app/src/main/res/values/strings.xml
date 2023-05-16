@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">20230513-UdaybhaskarVS-NYCSchools</string>
+    <string name="app_name">NYCSchools</string>
     <string name="loadingError">An error occurred while loading data</string>
 </resources>
