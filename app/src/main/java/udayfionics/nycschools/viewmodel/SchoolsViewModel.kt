@@ -45,7 +45,7 @@ class SchoolsViewModel : BaseViewModel() {
                 val schoolsList = it.schoolDao().getAllSchools()
                 if (schoolsList.isNotEmpty()) {
                     updateSchoolsListUI(schoolsList)
-                    toast.value = "Schools retrieved from database"
+                    //toast.value = "Schools retrieved from database"
                 } else {
                     fetchFromRemote()
                 }
@@ -63,7 +63,7 @@ class SchoolsViewModel : BaseViewModel() {
                     override fun onSuccess(schoolsList: List<School>) {
                         updateSchoolsListUI(schoolsList)
                         storeSchoolsLocally(schoolsList)
-                        toast.value = "Schools retrieved from remote"
+                        //toast.value = "Schools retrieved from remote"
                     }
 
                     override fun onError(e: Throwable) {
@@ -80,7 +80,7 @@ class SchoolsViewModel : BaseViewModel() {
                 .subscribeWith(object : DisposableSingleObserver<List<SatScore>>() {
                     override fun onSuccess(satScoreList: List<SatScore>) {
                         storeSatScoresLocally(satScoreList)
-                        toast.value = "SatScores retrieved from remote"
+                        //toast.value = "SatScores retrieved from remote"
                     }
 
                     override fun onError(e: Throwable) {
@@ -107,7 +107,7 @@ class SchoolsViewModel : BaseViewModel() {
                 val dao = it.schoolDao()
                 dao.deleteAllSchools()
                 val result = dao.insertAll(*schoolList.toTypedArray())
-                toast.value = "${result.size} stored"
+                //toast.value = "${result.size} stored"
             }
         }
     }
@@ -117,9 +117,9 @@ class SchoolsViewModel : BaseViewModel() {
             launch {
                 val satScoreDao = it.satScoreDao()
                 satScoreDao.deleteAllSatScores()
-//                satScoreDao.insertAll(*satScoreList.toTypedArray())
-                val satScoreResult = satScoreDao.insertAll(*satScoreList.toTypedArray())
-                toast.value = "${satScoreResult.size} stored"
+                satScoreDao.insertAll(*satScoreList.toTypedArray())
+                //val satScoreResult = satScoreDao.insertAll(*satScoreList.toTypedArray())
+                //toast.value = "${satScoreResult.size} stored"
             }
         }
     }
